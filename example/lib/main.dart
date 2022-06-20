@@ -36,6 +36,7 @@ class _MyAppState extends State<MyApp> {
     print("current:$_currentInput");
     _availableInputs = await FlutterAudioManager.getAvailableInputs();
     print("available $_availableInputs");
+    setState(() {});
   }
 
   @override
@@ -47,6 +48,26 @@ class _MyAppState extends State<MyApp> {
             padding: const EdgeInsets.all(10),
             child: Column(
               children: <Widget>[
+                Row(
+                  children: [
+                    TextButton(
+                      onPressed: FlutterAudioManager.changeToSpeaker,
+                      child: Text("Speaker"),
+                    ),
+                    TextButton(
+                      onPressed: FlutterAudioManager.changeToReceiver,
+                      child: Text("receiver"),
+                    ),
+                    TextButton(
+                      onPressed: FlutterAudioManager.changeToHeadphones,
+                      child: Text("headset"),
+                    ),
+                    TextButton(
+                      onPressed: FlutterAudioManager.changeToBluetooth,
+                      child: Text("bluetooth"),
+                    ),
+                  ],
+                ),
                 Text(
                   "current output:${_currentInput.name} ${_currentInput.port}",
                 ),
@@ -70,17 +91,8 @@ class _MyAppState extends State<MyApp> {
           ),
         ),
         floatingActionButton: FloatingActionButton(
-          onPressed: () async {
-            bool res = false;
-            if (_currentInput.port == AudioPort.receiver) {
-              res = await FlutterAudioManager.changeToSpeaker();
-              print("change to speaker:$res");
-            } else {
-              res = await FlutterAudioManager.changeToReceiver();
-              print("change to receiver:$res");
-            }
-            await _getInput();
-          },
+          child: Text("refresh"),
+          onPressed: () => _getInput(),
         ),
       ),
     );
