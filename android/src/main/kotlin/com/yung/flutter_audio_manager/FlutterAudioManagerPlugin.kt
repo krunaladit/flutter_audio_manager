@@ -102,7 +102,7 @@ class FlutterAudioManagerPlugin: FlutterPlugin, MethodChannel.MethodCallHandler,
             // makes sure sco manager is off when no device paired
             audioManager?.isBluetoothScoOn = false
         }
-        Log.i(LOG_TAG, "SCO: ${audioManager?.isBluetoothScoOn} hasConnectedDevice $hasConnectedDevice")
+        // Log.i(LOG_TAG, "SCO: ${audioManager?.isBluetoothScoOn} hasConnectedDevice $hasConnectedDevice")
         when {
             audioManager?.isSpeakerphoneOn == true -> info.addAll(arrayOf("Speaker", "2"))
             isBtScoOn && hasConnectedDevice -> info.addAll(arrayOf("Bluetooth", "4"))
