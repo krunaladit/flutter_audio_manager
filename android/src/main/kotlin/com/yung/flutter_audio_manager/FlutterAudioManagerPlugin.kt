@@ -184,7 +184,7 @@ class FlutterAudioManagerPlugin: FlutterPlugin, MethodChannel.MethodCallHandler,
     }
 
     override fun onRequestPermissionsResult(
-        requestCode: Int, permissions: Array<String?>?, grantResults: IntArray
+        requestCode: Int, permissions: Array<out String>, grantResults: IntArray
     ): Boolean {
         if (requestCode == REQUEST_BLUETOOTH_CONNECT_PERMISSION) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
