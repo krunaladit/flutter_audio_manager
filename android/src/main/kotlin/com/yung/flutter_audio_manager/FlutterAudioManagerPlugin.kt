@@ -11,7 +11,6 @@ import android.media.AudioDeviceInfo
 import android.media.AudioManager
 import android.os.Build
 import android.util.Log
-import androidx.annotation.NonNull
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import io.flutter.embedding.engine.plugins.FlutterPlugin
@@ -59,9 +58,7 @@ class FlutterAudioManagerPlugin: FlutterPlugin, MethodChannel.MethodCallHandler,
         return true
     }
 
-    private fun changeToHeadphones(): Boolean {
-        return changeToReceiver()
-    }
+    private fun changeToHeadphones(): Boolean = changeToReceiver()
 
     private fun changeToBluetooth(): Boolean {
         audioManager?.mode = AudioManager.MODE_IN_COMMUNICATION
@@ -142,7 +139,7 @@ class FlutterAudioManagerPlugin: FlutterPlugin, MethodChannel.MethodCallHandler,
         return list
     }
 
-    override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
+    override fun onAttachedToEngine(flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
         pluginBinding = flutterPluginBinding
     }
 
@@ -171,7 +168,7 @@ class FlutterAudioManagerPlugin: FlutterPlugin, MethodChannel.MethodCallHandler,
         btManager = null
     }
 
-    override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: MethodChannel.Result) {
+    override fun onMethodCall(call: MethodCall, result: MethodChannel.Result) {
         when (call.method) {
             "getCurrentOutput" -> result.success(getCurrentOutput())
             "getAvailableInputs" -> result.success(getAvailableInputs())
@@ -197,7 +194,7 @@ class FlutterAudioManagerPlugin: FlutterPlugin, MethodChannel.MethodCallHandler,
         return false
     }
 
-    override fun onDetachedFromEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {
+    override fun onDetachedFromEngine(binding: FlutterPlugin.FlutterPluginBinding) =
         channel.setMethodCallHandler(null)
-    }
+
 }
