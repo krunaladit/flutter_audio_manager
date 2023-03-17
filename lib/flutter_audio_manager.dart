@@ -19,7 +19,7 @@ enum AudioPort {
 }
 
 class AudioInput {
-  final String name;
+  final String? name;
   final int _port;
   AudioPort get port {
     return AudioPort.values[_port];
@@ -36,15 +36,16 @@ class AudioInput {
 class FlutterAudioManager {
   static const MethodChannel _channel =
       const MethodChannel('flutter_audio_manager');
-  static void Function() _onInputChanged;
+  static void Function()? _onInputChanged;
 
-  static Future<String> get platformVersion async {
-    final String version = await _channel.invokeMethod('getPlatformVersion');
+  static Future<String?> get platformVersion async {
+    final String? version = await _channel.invokeMethod('getPlatformVersion');
     return version;
   }
 
   static Future<AudioInput> getCurrentOutput() async {
-    final List<dynamic> data = await _channel.invokeMethod('getCurrentOutput');
+    final List<dynamic> data =
+        await (_channel.invokeMethod('getCurrentOutput'));
     return AudioInput(data[0], int.parse(data[1]));
   }
 
@@ -59,19 +60,19 @@ class FlutterAudioManager {
     return arr;
   }
 
-  static Future<bool> changeToSpeaker() async {
+  static Future<bool?> changeToSpeaker() async {
     return await _channel.invokeMethod('changeToSpeaker');
   }
 
-  static Future<bool> changeToReceiver() async {
+  static Future<bool?> changeToReceiver() async {
     return await _channel.invokeMethod('changeToReceiver');
   }
 
-  static Future<bool> changeToHeadphones() async {
+  static Future<bool?> changeToHeadphones() async {
     return await _channel.invokeMethod('changeToHeadphones');
   }
 
-  static Future<bool> changeToBluetooth() async {
+  static Future<bool?> changeToBluetooth() async {
     return await _channel.invokeMethod('changeToBluetooth');
   }
 
@@ -84,7 +85,7 @@ class FlutterAudioManager {
     if (_onInputChanged == null) return;
     switch (call.method) {
       case "inputChanged":
-        return _onInputChanged();
+        return _onInputChanged!();
       default:
         break;
     }
