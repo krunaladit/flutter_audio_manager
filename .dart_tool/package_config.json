@@ -155,10 +155,10 @@
       "name": "flutter_audio_manager",
       "rootUri": "../",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "2.17"
     }
   ],
-  "generated": "2025-03-18T08:51:37.744119Z",
+  "generated": "2025-03-19T06:18:01.436532Z",
   "generator": "pub",
   "generatorVersion": "3.7.0",
   "flutterRoot": "file:///Users/home/Desktop/flutter",
